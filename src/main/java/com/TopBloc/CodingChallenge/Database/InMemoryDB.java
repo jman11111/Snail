@@ -3,16 +3,15 @@ package com.TopBloc.CodingChallenge.Database;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.commons.math3.ml.neuralnet.twod.util.HitHistogram;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import com.TopBloc.CodingChallenge.Domain.Student;
@@ -32,8 +31,8 @@ public class InMemoryDB {
 	public void createDB() {
 		try {
 		this.initStudents();
-		this.readScores("./data/Test Scores.xlsx");
-		this.readScores("./data/Test Retake Scores.xlsx");
+		this.readScores("Test Scores.xlsx");
+		this.readScores("Test Retake Scores.xlsx");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -54,9 +53,9 @@ public class InMemoryDB {
 	//Grabs all students from file and initializes Hashmap(database) with them
     private void initStudents() throws IOException {
     		
-            File file = new File("./data/Student Info.xlsx"); // creating a new file instance
-            FileInputStream inputStream = new FileInputStream(file);
-             
+            //File file = new File("./resources/Student Info.xlsx"); // creating a new file instance
+            //FileInputStream inputStream = new FileInputStream(file);
+            InputStream inputStream = getClass().getResourceAsStream("/Student Info.xlsx");
             XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
             Sheet firstSheet = workbook.getSheetAt(0);
             Iterator<Row> iterator = firstSheet.iterator();
@@ -106,9 +105,9 @@ public class InMemoryDB {
     // Reads scores onto the corresponding students when given score file
     private void readScores(String filename) throws IOException {
 		
-        File file = new File(filename); // creating a new file instance
-        FileInputStream inputStream = new FileInputStream(file);
-         
+        //File file = new File(filename); // creating a new file instance
+        //FileInputStream inputStream = new FileInputStream(file);
+        InputStream inputStream = getClass().getResourceAsStream("/"+filename);
         XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
         Sheet firstSheet = workbook.getSheetAt(0);
         Iterator<Row> iterator = firstSheet.iterator();
