@@ -64,7 +64,7 @@ public class ChallengeMain {
 	
 	public static void sendResults(int avg, String[] ids) {
 		try {
-			URL url = new URL ("https://httpbin.org/post");
+			URL url = new URL ("http://54.90.99.192:5000/challenge");
 			HttpURLConnection con = (HttpURLConnection)url.openConnection();
 			con.setRequestMethod("POST");
 			con.setRequestProperty("Content-Type", "application/json; utf-8");
@@ -111,7 +111,6 @@ public class ChallengeMain {
 		for(String s : studentIds) {
 			System.out.println(s);
 		}
-		System.out.println(studentIds.toString());
-		//sendResults(avgScore, studentIds);
+		sendResults(avgScore, studentIds);
 	}
 }

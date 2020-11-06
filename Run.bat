@@ -1,0 +1,1 @@
+mvn clean package & cd %~dp0\target & java -jar StudentScores-1.0.jar & cmd /k
